@@ -533,7 +533,7 @@
 
         /* --- قسم برنامج الحفل التفاعلي بالمسار المتعرج والكرة اللؤلؤية --- */
         .schedule-section {
-            padding: 25px 15px 10px 15px;
+            padding: 25px 15px 30px 15px;
             text-align: center;
             position: relative;
         }
@@ -640,7 +640,6 @@
             transition: transform 0.4s ease;
         }
 
-        /* تكبير الحجم لأيقوني زفة العروس وزفة المعرس بشكل مخصص */
         .curved-icon-large {
             width: 112px !important;
             height: 112px !important;
@@ -671,135 +670,6 @@
             font-size: 1.15rem;
             color: var(--button-dark);
             font-weight: 700 !important;
-        }
-
-        /* قسم تأكيد الحضور */
-        .rsvp-section-container {
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        .chair-icon-img {
-            width: 140px;
-            max-width: 45%;
-            height: auto;
-            margin: 0 auto 15px auto;
-            display: block;
-            opacity: 0.9;
-        }
-
-        .rsvp-main-title {
-            font-size: 1.8rem;
-            color: #3b352e;
-            margin-bottom: 6px;
-        }
-
-        .rsvp-subtext-1 {
-            font-size: 0.85rem;
-            color: #a39284;
-            margin-bottom: 4px;
-        }
-
-        .rsvp-subtext-2 {
-            font-size: 0.85rem;
-            color: #702f3b;
-            font-weight: 500 !important;
-            margin-bottom: 25px;
-        }
-
-        .rsvp-custom-form {
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-            text-align: right;
-            max-width: 100%;
-            margin: 0 auto;
-        }
-
-        .rsvp-field-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            text-align: right;
-        }
-
-        .rsvp-field-label {
-            font-size: 0.85rem;
-            color: #8c827a;
-            text-align: right;
-        }
-
-        .rsvp-input-box {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--input-border);
-            border-radius: 2px;
-            font-size: 0.9rem;
-            background-color: #faf7f5;
-            color: #333;
-            outline: none;
-            transition: border-color 0.3s;
-            text-align: right;
-        }
-
-        .rsvp-input-box:focus {
-            border-color: var(--button-dark);
-        }
-
-        .rsvp-input-box::placeholder {
-            color: #c4b8ad;
-            text-align: right;
-        }
-
-        .rsvp-radio-options {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 15px;
-            margin-top: 4px;
-            direction: rtl;
-        }
-
-        .rsvp-radio-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #8c827a;
-            cursor: pointer;
-        }
-
-        .rsvp-radio-item input[type="radio"] {
-            accent-color: var(--button-dark);
-            width: 16px;
-            height: 16px;
-            cursor: pointer;
-        }
-
-        .rsvp-textarea {
-            resize: vertical;
-            min-height: 80px;
-            text-align: right;
-        }
-
-        .rsvp-submit-btn {
-            background-color: var(--button-dark);
-            color: #ffffff;
-            border: none;
-            padding: 12px;
-            font-size: 0.95rem;
-            border-radius: 2px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 8px;
-            transition: opacity 0.3s ease;
-        }
-
-        .rsvp-submit-btn:hover {
-            opacity: 0.92;
         }
 
         .music-control-btn {
@@ -1090,7 +960,7 @@
                         </div>
                     </div>
 
-                    <!-- 3. زفة العروس 10:00 (تم تكبير الحجم عبر الكلاس المخصص) -->
+                    <!-- 3. زفة العروس 10:00 -->
                     <div class="curved-item" style="top: 355px;">
                         <div class="curved-col curved-text-box align-left-side">
                             <span class="curved-time">10:00 PM</span>
@@ -1102,7 +972,7 @@
                         </div>
                     </div>
 
-                    <!-- 4. زفة المعرس 11:00 (تم تكبير الحجم عبر الكلاس المخصص) -->
+                    <!-- 4. زفة المعرس 11:00 -->
                     <div class="curved-item" style="top: 515px;">
                         <div class="curved-col">
                             <img src="assets/schedule-groom-zaffa.png" alt="زفة المعرس" class="curved-icon-img curved-icon-large">
@@ -1126,51 +996,6 @@
                     </p>
                     <div class="with-love-text">مع كل الحب</div>
                 </div>
-            </div>
-
-            <!-- قسم تأكيد الحضور -->
-            <div class="rsvp-section-container">
-                <img src="assets/chair-icon.png" alt="كرسي" class="chair-icon-img">
-                
-                <div class="rsvp-main-title">تأكيد الحضور</div>
-                <div class="rsvp-subtext-1">نرجو الرد قبل 5 ديسمبر 2026</div>
-                <div class="rsvp-subtext-2">نوماً هنيئاً لأطفالكم</div>
-
-                <form class="rsvp-custom-form" onsubmit="handleRSVP(event)">
-                    <div class="rsvp-field-group">
-                        <label class="rsvp-field-label">الاسم الكامل *</label>
-                        <input type="text" class="rsvp-input-box" id="input-name" placeholder="اسمك الكامل" required>
-                    </div>
-
-                    <div class="rsvp-field-group">
-                        <label class="rsvp-field-label">رقم الهاتف *</label>
-                        <input type="tel" class="rsvp-input-box" placeholder="+970 59 123 4567" dir="ltr" style="text-align: right;" required>
-                    </div>
-
-                    <div class="rsvp-field-group">
-                        <label class="rsvp-field-label">هل ستحضرون؟ *</label>
-                        <div class="rsvp-radio-options">
-                            <label class="rsvp-radio-item">
-                                <input type="radio" name="attendance" value="yes" checked required>
-                                <span>نعم، سأحضر</span>
-                            </label>
-                            <label class="rsvp-radio-item">
-                                <input type="radio" name="attendance" value="no">
-                                <span>لا أستطيع الحضور</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="rsvp-field-group">
-                        <label class="rsvp-field-label">رسالة للعروسين (اختياري)</label>
-                        <textarea class="rsvp-input-box rsvp-textarea" id="input-msg" placeholder="شاركونا أمنياتكم..."></textarea>
-                    </div>
-
-                    <button type="submit" class="rsvp-submit-btn">
-                        <span>إرسال التأكيد</span>
-                        <svg class="svg-icon" style="width: 16px; height: 16px; fill: #ffffff; transform: rotate(-30deg);" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-                    </button>
-                </form>
 
                 <div class="bottom-logo-container">
                     <img src="assets/bottom-logo.png" alt="شعار العروسين" class="bottom-logo-img">
@@ -1335,12 +1160,6 @@ END:VCALENDAR`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        }
-
-        function handleRSVP(e) {
-            e.preventDefault();
-            alert("شكراً لك! تم استلام تأكيد حضورك بنجاح.");
-            e.target.reset();
         }
     </script>
 </body>
