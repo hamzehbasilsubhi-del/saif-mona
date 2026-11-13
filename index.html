@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>دعوة زفاف سيف ومنى</title>
+    <!-- خطوط Cairo و Amiri -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #7d6340;
+            --bg-color: #f7f4f0;
+            --card-bg: #ffffff;
+            --text-color: #4a4a4a;
+            --accent-color: #b89b72;
+            --oval-border: #d4c5b9;
+            --button-dark: #702f3b;
+            --icon-wine-color: #702f3b;
+            --input-border: #e6d3d6;
+            --label-color: #8c827a;
+            --app-width: min(100vw, 450px);
+            --app-height: min(100vh, calc(min(100vw, 450px) * 16 / 9));
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 300 !important;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #121212;
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow: hidden;
+        }
+
+        .app-container {
+            width: 100vw;
+            max-width: 450px;
+            height: 100vh;
+            height: 100dvh;
+            max-height: calc(100vw * 16 / 9);
+            background: var(--bg-color);
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: 0;
+        }
+
+        @media (min-width: 451px) {
+            .app-container {
+                height: calc(450px * 16 / 9);
+                border-radius: 16px;
+            }
+        }
+
+        /* 1. شاشة فيديو المغلف الافتتاحية */
+        #intro-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            background: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+            cursor: pointer;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .cover-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 2;
+            transition: opacity 0.3s ease;
+        }
+
+        .hidden-trigger-btn {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            z-index: 5;
+        }
+
+        #intro-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 9 / 16;
+            z-index: 1;
+        }
+
+        /* 2. الصفحة الرئيسية للدعوة */
+        #main-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            padding-bottom: 40px;
+            width: 100%;
+        }
+
+        #main-content.visible {
+            display: block;
+            opacity: 1;
+        }
+
+        /* فيديو البانر الرئيسي */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px 25px 20px;
+            color: #ffffff;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .banner-top-logo {
+            max-width: 82px;
+            height: auto;
+            margin-top: 85px;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+        }
+
+        .quran-verse-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            transform: translateY(-45px);
+        }
+
+        .quran-verse-img {
+            width: 46%;
+            max-width: 190px;
+            height: auto;
+            display: block;
+            filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+            margin-bottom: 12px;
+        }
+
+        .quran-text-content {
+            font-family: 'Amiri', serif;
+            font-size: 0.88rem;
+            line-height: 1.75;
+            color: #ffffff;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+            width: 76%;
+            max-width: 310px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .quran-surah-name {
+            font-family: 'Amiri', serif;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes bounceDown {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(8px);
+            }
+            60% {
+                transform: translateY(4px);
+            }
+        }
+
+        .scroll-down-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            animation: bounceDown 2s infinite;
+            margin-bottom: 5px;
+        }
+
+        .scroll-down-indicator svg {
+            width: 18px;
+            height: 18px;
+            fill: rgba(255, 255, 255, 0.85);
+        }
+
+        /* --- قسم النصوص والحركات أسفل البانر --- */
+        .hero-text-section {
+            background-color: var(--bg-color);
+            color: #3b352e;
+            padding: 35px 20px 25px 20px;
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .top-section-img {
+            width: 110px;
+            max-width: 45%;
+            height: auto;
+            margin: 0 auto 15px auto;
+            display: block;
+            opacity: 0.95;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .animated-text-1 {
+            font-size: 1.1rem;
+            color: #aa9275;
+            margin-bottom: 14px;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .animated-text-2 {
+            font-size: 1.15rem;
+            font-weight: 500 !important;
+            color: #3b352e;
+            margin-bottom: 12px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .animated-text-3 {
+            font-size: 1.05rem;
+            color: #3b352e;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        .couple-names-img {
+            max-width: 58%;
+            height: auto;
+            margin: 8px auto 18px auto;
+            display: block;
+            animation: fadeInUp 1.4s ease forwards;
+        }
+
+        .invitation-footer-text {
+            font-size: 0.95rem;
+            color: #665c54;
+            margin-bottom: 22px;
+            animation: fadeInUp 1.6s ease forwards;
+        }
+
+        .event-info-icons-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 20px auto 15px auto;
+            animation: fadeInUp 1.8s ease forwards;
+        }
+
+        .info-icon-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-icon-img {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .info-icon-label {
+            font-size: 0.85rem;
+            color: #8c827a;
+            font-weight: 500 !important;
+            white-space: nowrap;
+        }
+
+        /* تصميم قسم العد التنازلي */
+        .countdown-section {
+            padding: 25px 12px 20px 12px;
+            text-align: center;
+            background-color: var(--bg-color);
+        }
+
+        .countdown-main-title {
+            font-size: 1.75rem;
+            color: #3b352e;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .countdown-container-oval {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            direction: ltr;
+        }
+
+        .oval-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            max-width: 75px;
+        }
+
+        .oval-box {
+            width: 58px;
+            height: 78px;
+            border-radius: 50%;
+            border: 1px solid var(--oval-border);
+            background-color: #faf7f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .oval-number {
+            font-size: 1.8rem;
+            color: #2c2520;
+            line-height: 1;
+        }
+
+        .oval-label {
+            font-size: 0.8rem;
+            color: #8c827a;
+            margin-top: 10px;
+        }
+
+        .star-divider {
+            color: #e5d8cc;
+            font-size: 0.55rem;
+            margin-top: -24px;
+        }
+
+        .divider-container {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            line-height: 0;
+        }
+
+        .divider-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .section-padding {
+            padding: 30px 15px 15px 15px;
+            text-align: center;
+        }
+
+        .event-details-header {
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .event-details-title {
+            font-size: 1.8rem;
+            color: #3b352e;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .floral-divider-container {
+            text-align: center;
+            margin: 18px 0 22px 0;
+        }
+
+        .floral-divider-img {
+            max-width: 180px;
+            width: 65%;
+            height: auto;
+            display: inline-block;
+            opacity: 0.95;
+        }
+
+        .venue-icon-img-large {
+            width: 100%;
+            max-width: 240px;
+            height: auto;
+            margin: 0 auto 12px auto;
+            display: block;
+            opacity: 0.95;
+        }
+
+        .venue-title-text {
+            font-size: 1.25rem;
+            color: #3b352e;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .map-card-framed {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 6px;
+            border: 1px solid #e8e2d9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            margin-bottom: 20px;
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #e5e3df;
+        }
+
+        .map-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .venue-info-section {
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .start-time-text {
+            font-size: 0.9rem;
+            color: #8c827a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons-group {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 11px 15px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-maps {
+            background-color: var(--button-dark);
+            color: #ffffff;
+            border: 1px solid var(--button-dark);
+        }
+
+        .btn-calendar {
+            background-color: transparent;
+            color: var(--button-dark);
+            border: 1px solid var(--button-dark);
+        }
+
+        /* --- قسم برنامج الحفل التفاعلي بالمسار المتعرج والكرة اللؤلؤية --- */
+        .schedule-section {
+            padding: 25px 15px 10px 15px;
+            text-align: center;
+            position: relative;
+        }
+
+        .curved-timeline-container {
+            position: relative;
+            width: 100%;
+            max-width: 390px;
+            height: 620px;
+            margin: 25px auto 15px auto;
+            direction: ltr;
+        }
+
+        .timeline-curve-svg {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .moving-pearl {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+            pointer-events: none;
+            background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f0e8df 45%, #c7b6a3 85%, #9e8b76 100%);
+            box-shadow: 0 3px 8px rgba(112, 47, 59, 0.25), inset -2px -2px 4px rgba(0,0,0,0.12);
+            will-change: transform;
+        }
+
+        .curved-item {
+            position: absolute;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 2;
+        }
+
+        .curved-col {
+            width: 38%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .curved-text-box {
+            direction: rtl;
+        }
+
+        .curved-text-box.align-left-side {
+            text-align: left;
+            align-items: flex-end;
+        }
+
+        .curved-text-box.align-right-side {
+            text-align: right;
+            align-items: flex-start;
+        }
+
+        .curved-time {
+            font-size: 0.85rem;
+            color: var(--button-dark);
+            font-weight: 500 !important;
+            letter-spacing: 0.8px;
+            margin-bottom: 3px;
+            direction: ltr;
+        }
+
+        .curved-title {
+            font-family: 'Amiri', serif;
+            font-size: 1.35rem;
+            color: #3b352e;
+            font-weight: 700 !important;
+            line-height: 1.25;
+            margin-bottom: 2px;
+        }
+
+        .curved-subtitle {
+            font-size: 0.78rem;
+            color: #8c827a;
+            font-style: italic;
+        }
+
+        .curved-icon-img {
+            width: 82px;
+            height: 82px;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.06));
+            transition: transform 0.4s ease;
+        }
+
+        /* تكبير الحجم لأيقوني زفة العروس وزفة المعرس بشكل مخصص */
+        .curved-icon-large {
+            width: 112px !important;
+            height: 112px !important;
+            max-width: none !important;
+        }
+
+        .curved-item:hover .curved-icon-img {
+            transform: scale(1.05);
+        }
+
+        /* تنسيق قسم الملاحظة أسفل البرنامج */
+        .adults-only-section {
+            margin-top: 15px;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .adults-only-text {
+            font-size: 0.9rem;
+            color: #665c54;
+            line-height: 1.7;
+            max-width: 320px;
+            margin: 0 auto 12px auto;
+        }
+
+        .with-love-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.15rem;
+            color: var(--button-dark);
+            font-weight: 700 !important;
+        }
+
+        /* قسم تأكيد الحضور */
+        .rsvp-section-container {
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .chair-icon-img {
+            width: 140px;
+            max-width: 45%;
+            height: auto;
+            margin: 0 auto 15px auto;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .rsvp-main-title {
+            font-size: 1.8rem;
+            color: #3b352e;
+            margin-bottom: 6px;
+        }
+
+        .rsvp-subtext-1 {
+            font-size: 0.85rem;
+            color: #a39284;
+            margin-bottom: 4px;
+        }
+
+        .rsvp-subtext-2 {
+            font-size: 0.85rem;
+            color: #702f3b;
+            font-weight: 500 !important;
+            margin-bottom: 25px;
+        }
+
+        .rsvp-custom-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: right;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .rsvp-field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .rsvp-field-label {
+            font-size: 0.85rem;
+            color: #8c827a;
+            text-align: right;
+        }
+
+        .rsvp-input-box {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--input-border);
+            border-radius: 2px;
+            font-size: 0.9rem;
+            background-color: #faf7f5;
+            color: #333;
+            outline: none;
+            transition: border-color 0.3s;
+            text-align: right;
+        }
+
+        .rsvp-input-box:focus {
+            border-color: var(--button-dark);
+        }
+
+        .rsvp-input-box::placeholder {
+            color: #c4b8ad;
+            text-align: right;
+        }
+
+        .rsvp-radio-options {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 15px;
+            margin-top: 4px;
+            direction: rtl;
+        }
+
+        .rsvp-radio-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: #8c827a;
+            cursor: pointer;
+        }
+
+        .rsvp-radio-item input[type="radio"] {
+            accent-color: var(--button-dark);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        .rsvp-textarea {
+            resize: vertical;
+            min-height: 80px;
+            text-align: right;
+        }
+
+        .rsvp-submit-btn {
+            background-color: var(--button-dark);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            font-size: 0.95rem;
+            border-radius: 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            transition: opacity 0.3s ease;
+        }
+
+        .rsvp-submit-btn:hover {
+            opacity: 0.92;
+        }
+
+        .music-control-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 15px;
+            z-index: 999;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--button-dark);
+            color: #fff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+
+        .music-control-btn:active {
+            transform: scale(0.92);
+        }
+
+        .svg-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .btn-maps .svg-icon {
+            fill: #ffffff;
+        }
+
+        .btn-calendar .svg-icon {
+            fill: var(--button-dark);
+        }
+
+        .music-control-btn .svg-icon {
+            fill: #ffffff;
+            width: 16px;
+            height: 16px;
+        }
+
+        .bottom-logo-container {
+            margin-top: 35px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .bottom-logo-img {
+            width: 80px;
+            height: auto;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .bottom-event-date {
+            font-size: 0.8rem;
+            color: #a39284;
+            letter-spacing: 2px;
+            direction: ltr;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="app-viewport">
+
+        <!-- عنصر الصوت خلفية الدعوة -->
+        <audio id="bg-audio" loop preload="auto">
+            <source src="assets/bg-music.mp3" type="audio/mpeg">
+        </audio>
+
+        <!-- زر التحكم بالموسيقى -->
+        <button id="music-toggle-btn" class="music-control-btn" onclick="toggleAudio()" title="تشغيل / إيقاف الصوت">
+            <span id="music-icon-container">
+                <svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+            </span>
+        </button>
+
+        <!-- 1. شاشة فيديو المغلف الافتتاحية -->
+        <div id="intro-screen" onclick="startExperience()">
+            <img src="assets/cover.jpg" id="cover-img" class="cover-img" alt="غلاف الدعوة">
+            <button class="hidden-trigger-btn" id="start-btn"></button>
+
+            <video id="intro-video" playsinline preload="auto" muted>
+                <source src="assets/intro.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <!-- 2. الصفحة الرئيسية للدعوة -->
+        <div id="main-content">
+            
+            <!-- فيديو البانر الرئيسي -->
+            <div class="hero-banner">
+                <video class="hero-video" autoplay loop muted playsinline preload="auto">
+                    <source src="assets/hero.mp4" type="video/mp4">
+                </video>
+
+                <div class="hero-overlay">
+                    <img src="assets/top-logo.png" alt="شعار الدعوة" class="banner-top-logo">
+
+                    <div class="quran-verse-container">
+                        <img src="assets/quran-verse.png" alt="آية قرآنية" class="quran-verse-img">
+                        <div class="quran-text-content">
+                            ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ ﴾
+                        </div>
+                        <div class="quran-surah-name">﴿سورة الروم 21﴾</div>
+                    </div>
+
+                    <div class="scroll-down-indicator">
+                        <span>اسحب للأسفل</span>
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم النصوص والحركات أسفل البانر -->
+            <div class="hero-text-section">
+                <img src="assets/top-decoration.png" alt="زخرفة علوية" class="top-section-img">
+
+                <div class="animated-text-1">بكل معاني الحب والود</div>
+                <div class="animated-text-2">نَـــــــــــــــــتَشرّف</div>
+                <div class="animated-text-3">بِدَعْوَتِكُـــــم لِــحُضُورِ حَفْـــلِ زِفَـــاف</div>
+                
+                <img src="assets/couple-names.png" alt="سيف و منى" class="couple-names-img">
+                
+                <div class="invitation-footer-text">وذلك بمشيئة الله</div>
+
+                <div class="event-info-icons-row">
+                    <div class="info-icon-item">
+                        <img src="assets/day-icon.png" alt="يوم السبت" class="info-icon-img">
+                        <span class="info-icon-label">يوم السبت</span>
+                    </div>
+
+                    <div class="info-icon-item">
+                        <img src="assets/calendar-icon.png" alt="12.12.2026" class="info-icon-img">
+                        <span class="info-icon-label">12.12.2026</span>
+                    </div>
+
+                    <div class="info-icon-item">
+                        <img src="assets/clock-icon.png" alt="8:00 مساءً" class="info-icon-img">
+                        <span class="info-icon-label">8:00 مساءً</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم العد التنازلي -->
+            <div class="countdown-section">
+                <div class="countdown-main-title">كل لحظـة تقربنـا</div>
+                
+                <div class="countdown-container-oval">
+                    <div class="oval-wrapper">
+                        <div class="oval-box">
+                            <span class="oval-number" id="seconds">00</span>
+                        </div>
+                        <span class="oval-label">ثانية</span>
+                    </div>
+
+                    <div class="star-divider">◆</div>
+
+                    <div class="oval-wrapper">
+                        <div class="oval-box">
+                            <span class="oval-number" id="minutes">00</span>
+                        </div>
+                        <span class="oval-label">دقيقة</span>
+                    </div>
+
+                    <div class="star-divider">◆</div>
+
+                    <div class="oval-wrapper">
+                        <div class="oval-box">
+                            <span class="oval-number" id="hours">00</span>
+                        </div>
+                        <span class="oval-label">ساعة</span>
+                    </div>
+
+                    <div class="star-divider">◆</div>
+
+                    <div class="oval-wrapper">
+                        <div class="oval-box">
+                            <span class="oval-number" id="days">00</span>
+                        </div>
+                        <span class="oval-label">يوم</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- فاصل زمني -->
+            <div class="divider-container">
+                <img src="assets/divider-clock.png" alt="فاصل" class="divider-img">
+            </div>
+
+            <!-- قسم موقع الحفل -->
+            <div class="section-padding">
+                <div class="event-details-header">
+                    <div class="event-details-title">مــوقع الحفـــــل</div>
+                </div>
+
+                <div class="floral-divider-container">
+                    <img src="assets/floral-divider.png" alt="فاصل وردي" class="floral-divider-img">
+                </div>
+
+                <img src="assets/venue-icon.png" alt="أيقونة القاعة" class="venue-icon-img-large">
+
+                <div class="venue-title-text">
+                    قاعة دبا للأفراح
+                </div>
+
+                <div class="map-card-framed">
+                    <div class="map-wrapper">
+                        <iframe src="https://maps.google.com/maps?q=قاعة+دبا+للأفراح&z=15&output=embed" title="Google Map Location"></iframe>
+                    </div>
+                </div>
+
+                <div class="venue-info-section">
+                    <div class="start-time-text">
+                        <span>وقت البدء: 8:00 مساءً</span>
+                        <svg class="svg-icon" style="width: 16px; height: 16px; fill: #8c827a;" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+
+                    <div class="action-buttons-group">
+                        <a href="https://maps.app.goo.gl/XYsPZaZLFbD3XkYj8?g_st=iw" target="_blank" class="action-btn btn-maps">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                            <span>فتح في الخرائط</span>
+                        </a>
+                        
+                        <button onclick="addToCalendar()" class="action-btn btn-calendar">
+                            <svg class="svg-icon" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5z"/></svg>
+                            <span>إضافة إلى التقويم</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- قسم برنامج الحفل بالخط المتعرج والكرة اللؤلؤية -->
+            <div class="schedule-section" id="schedule-section">
+                <div class="floral-divider-container" style="margin-top: 10px; margin-bottom: 18px;">
+                    <img src="assets/floral-divider.png" alt="فاصل وردي" class="floral-divider-img">
+                </div>
+
+                <div class="event-details-header">
+                    <div class="event-details-title">برنــامج الحفـــــل</div>
+                </div>
+
+                <div class="curved-timeline-container" id="curved-timeline">
+                    <!-- المسار المتعرج -->
+                    <svg class="timeline-curve-svg" viewBox="0 0 120 620" preserveAspectRatio="none">
+                        <path id="schedule-curve-path"
+                              d="M 60 20 C 90 100, 90 150, 60 210 C 30 270, 30 330, 60 390 C 90 450, 90 520, 60 600"
+                              fill="none"
+                              stroke="#b89b72"
+                              stroke-width="1.5"
+                              stroke-linecap="round"
+                              opacity="0.75" />
+                    </svg>
+
+                    <!-- الكرة اللؤلؤية المتحركة -->
+                    <img src="assets/pearl.png" alt="لؤلؤة" class="moving-pearl" id="moving-pearl" onerror="this.removeAttribute('src')">
+
+                    <!-- 1. الحضور 08:00 -->
+                    <div class="curved-item" style="top: 35px;">
+                        <div class="curved-col curved-text-box align-left-side">
+                            <span class="curved-time">08:00 PM</span>
+                            <span class="curved-title">الحضــور</span>
+                            <span class="curved-subtitle">الاستقبال والترحيب</span>
+                        </div>
+                        <div class="curved-col">
+                            <img src="assets/schedule-arrival.png" alt="الحضور" class="curved-icon-img">
+                        </div>
+                    </div>
+
+                    <!-- 2. العشا 09:00 -->
+                    <div class="curved-item" style="top: 195px;">
+                        <div class="curved-col">
+                            <img src="assets/schedule-dinner.png" alt="العشا" class="curved-icon-img">
+                        </div>
+                        <div class="curved-col curved-text-box align-right-side">
+                            <span class="curved-time">09:00 PM</span>
+                            <span class="curved-title">العشــــا</span>
+                            <span class="curved-subtitle">مأدبة الاحتفال</span>
+                        </div>
+                    </div>
+
+                    <!-- 3. زفة العروس 10:00 (تم تكبير الحجم عبر الكلاس المخصص) -->
+                    <div class="curved-item" style="top: 355px;">
+                        <div class="curved-col curved-text-box align-left-side">
+                            <span class="curved-time">10:00 PM</span>
+                            <span class="curved-title">زفة العروس</span>
+                            <span class="curved-subtitle">إطلالة الأميرة</span>
+                        </div>
+                        <div class="curved-col">
+                            <img src="assets/schedule-bride-zaffa.png" alt="زفة العروس" class="curved-icon-img curved-icon-large">
+                        </div>
+                    </div>
+
+                    <!-- 4. زفة المعرس 11:00 (تم تكبير الحجم عبر الكلاس المخصص) -->
+                    <div class="curved-item" style="top: 515px;">
+                        <div class="curved-col">
+                            <img src="assets/schedule-groom-zaffa.png" alt="زفة المعرس" class="curved-icon-img curved-icon-large">
+                        </div>
+                        <div class="curved-col curved-text-box align-right-side">
+                            <span class="curved-time">11:00 PM</span>
+                            <span class="curved-title">زفة المعرس</span>
+                            <span class="curved-subtitle">الموكب الاحتفالي</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الفاصل الوردي وملاحظة الكبار فقط -->
+                <div class="floral-divider-container" style="margin-top: 25px; margin-bottom: 18px;">
+                    <img src="assets/floral-divider.png" alt="فاصل وردي" class="floral-divider-img">
+                </div>
+
+                <div class="adults-only-section">
+                    <p class="adults-only-text">
+                        لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر الحفلة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
+                    </p>
+                    <div class="with-love-text">مع كل الحب</div>
+                </div>
+            </div>
+
+            <!-- قسم تأكيد الحضور -->
+            <div class="rsvp-section-container">
+                <img src="assets/chair-icon.png" alt="كرسي" class="chair-icon-img">
+                
+                <div class="rsvp-main-title">تأكيد الحضور</div>
+                <div class="rsvp-subtext-1">نرجو الرد قبل 5 ديسمبر 2026</div>
+                <div class="rsvp-subtext-2">نوماً هنيئاً لأطفالكم</div>
+
+                <form class="rsvp-custom-form" onsubmit="handleRSVP(event)">
+                    <div class="rsvp-field-group">
+                        <label class="rsvp-field-label">الاسم الكامل *</label>
+                        <input type="text" class="rsvp-input-box" id="input-name" placeholder="اسمك الكامل" required>
+                    </div>
+
+                    <div class="rsvp-field-group">
+                        <label class="rsvp-field-label">رقم الهاتف *</label>
+                        <input type="tel" class="rsvp-input-box" placeholder="+970 59 123 4567" dir="ltr" style="text-align: right;" required>
+                    </div>
+
+                    <div class="rsvp-field-group">
+                        <label class="rsvp-field-label">هل ستحضرون؟ *</label>
+                        <div class="rsvp-radio-options">
+                            <label class="rsvp-radio-item">
+                                <input type="radio" name="attendance" value="yes" checked required>
+                                <span>نعم، سأحضر</span>
+                            </label>
+                            <label class="rsvp-radio-item">
+                                <input type="radio" name="attendance" value="no">
+                                <span>لا أستطيع الحضور</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="rsvp-field-group">
+                        <label class="rsvp-field-label">رسالة للعروسين (اختياري)</label>
+                        <textarea class="rsvp-input-box rsvp-textarea" id="input-msg" placeholder="شاركونا أمنياتكم..."></textarea>
+                    </div>
+
+                    <button type="submit" class="rsvp-submit-btn">
+                        <span>إرسال التأكيد</span>
+                        <svg class="svg-icon" style="width: 16px; height: 16px; fill: #ffffff; transform: rotate(-30deg);" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                    </button>
+                </form>
+
+                <div class="bottom-logo-container">
+                    <img src="assets/bottom-logo.png" alt="شعار العروسين" class="bottom-logo-img">
+                    <div class="bottom-event-date">12.12.2026</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const video = document.getElementById('intro-video');
+        const coverImg = document.getElementById('cover-img');
+        const startBtn = document.getElementById('start-btn');
+        const bgAudio = document.getElementById('bg-audio');
+        const musicIconContainer = document.getElementById('music-icon-container');
+        const appViewport = document.getElementById('app-viewport');
+
+        const musicSVG = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>`;
+        const muteSVG = `<svg class="svg-icon" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>`;
+
+        let isStarted = false;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (video) {
+                video.load();
+            }
+            updatePearlPosition();
+        });
+
+        function startExperience() {
+            if (isStarted) return;
+            isStarted = true;
+
+            bgAudio.play().then(() => {
+                musicIconContainer.innerHTML = musicSVG;
+            }).catch(error => {
+                console.log("لم يتم تشغيل الصوت تلقائياً بسبب سياسة المتصفح: ", error);
+            });
+
+            video.muted = true;
+            video.currentTime = 0;
+            
+            const playPromise = video.play();
+
+            coverImg.style.opacity = '0';
+            startBtn.style.display = 'none';
+
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    setTimeout(() => {
+                        coverImg.style.display = 'none';
+                    }, 300);
+                }).catch(error => {
+                    console.log("خطأ تشغيل الفيديو: ", error);
+                    coverImg.style.display = 'none';
+                    transitionToMain();
+                });
+            } else {
+                coverImg.style.display = 'none';
+            }
+
+            video.onended = function() {
+                transitionToMain();
+            };
+        }
+
+        function toggleAudio() {
+            if (bgAudio.paused) {
+                bgAudio.play();
+                musicIconContainer.innerHTML = musicSVG;
+            } else {
+                bgAudio.pause();
+                musicIconContainer.innerHTML = muteSVG;
+            }
+        }
+
+        function transitionToMain() {
+            const introScreen = document.getElementById('intro-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            introScreen.classList.add('hidden');
+            mainContent.classList.add('visible');
+            appViewport.scrollTo({ top: 0, behavior: 'smooth' });
+            setTimeout(updatePearlPosition, 100);
+        }
+
+        // تحريك الكرة اللؤلؤية على طول الخط المتعرج بالتزامن مع التمرير
+        const curvePath = document.getElementById('schedule-curve-path');
+        const movingPearl = document.getElementById('moving-pearl');
+        const timelineContainer = document.getElementById('curved-timeline');
+
+        function updatePearlPosition() {
+            if (!curvePath || !movingPearl || !timelineContainer) return;
+
+            const viewportRect = appViewport.getBoundingClientRect();
+            const containerRect = timelineContainer.getBoundingClientRect();
+
+            // حساب نسبة التمرير بناءً على منتصف شاشة العرض
+            const triggerPoint = viewportRect.top + (viewportRect.height * 0.55);
+            const rawProgress = (triggerPoint - containerRect.top) / containerRect.height;
+            const progress = Math.max(0, Math.min(1, rawProgress));
+
+            const totalLength = curvePath.getTotalLength();
+            const point = curvePath.getPointAtLength(progress * totalLength);
+
+            // الإحداثيات النسبية لمركز الـ SVG (عرضه 120 ومركزه X=60)
+            const offsetX = point.x - 60;
+            const offsetY = point.y;
+
+            movingPearl.style.transform = `translate(calc(-50% + ${offsetX}px), calc(-50% + ${offsetY}px))`;
+        }
+
+        appViewport.addEventListener('scroll', () => {
+            requestAnimationFrame(updatePearlPosition);
+        }, { passive: true });
+
+        window.addEventListener('resize', updatePearlPosition);
+
+        // العد التنازلي
+        const eventDate = new Date('2026-12-12T20:00:00').getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = eventDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+            } else {
+                clearInterval(timer);
+                document.querySelector(".countdown-container-oval").innerHTML = `<p style='color:#3b352e;'>أهلاً بكم في حفلنا الآن!</p>`;
+            }
+        }, 1000);
+
+        function addToCalendar() {
+            const rescsData = 
+`BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Wedding Invitation//NONGNS
+BEGIN:VEVENT
+SUMMARY:حفل زفاف سيف ومنى
+DESCRIPTION:نتشرف بدعوتكم لحضور حفل زفافنا في قاعة دبا للأفراح.
+LOCATION:قاعة دبا للأفراح - https://maps.app.goo.gl/XYsPZaZLFbD3XkYj8?g_st=iw
+DTSTART:20261212T180000Z
+DTEND:20261212T220000Z
+END:VEVENT
+END:VCALENDAR`;
+
+            const blob = new Blob([rescsData], { type: 'text/calendar;charset=utf-8' });
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'wedding-event.ics');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function handleRSVP(e) {
+            e.preventDefault();
+            alert("شكراً لك! تم استلام تأكيد حضورك بنجاح.");
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
