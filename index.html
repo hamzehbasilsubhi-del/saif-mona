@@ -650,19 +650,20 @@
             transform: scale(1.05);
         }
 
-        /* تنسيق قسم الملاحظة أسفل البرنامج */
-        .adults-only-section {
-            margin-top: 15px;
-            padding: 0 15px;
+        /* تنسيق صورة التوجيهات الجديدة بدلاً من النص القديم */
+        .rules-image-section {
+            margin-top: 20px;
+            padding: 0 10px;
             text-align: center;
         }
 
-        .adults-only-text {
-            font-size: 0.9rem;
-            color: #665c54;
-            line-height: 1.7;
-            max-width: 320px;
+        .rules-img-banner {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
             margin: 0 auto 12px auto;
+            display: block;
+            opacity: 0.95;
         }
 
         .with-love-text {
@@ -670,6 +671,7 @@
             font-size: 1.15rem;
             color: var(--button-dark);
             font-weight: 700 !important;
+            margin-top: 8px;
         }
 
         .music-control-btn {
@@ -985,15 +987,14 @@
                     </div>
                 </div>
 
-                <!-- الفاصل الوردي وملاحظة الكبار فقط -->
+                <!-- الفاصل الوردي -->
                 <div class="floral-divider-container" style="margin-top: 25px; margin-bottom: 18px;">
                     <img src="assets/floral-divider.png" alt="فاصل وردي" class="floral-divider-img">
                 </div>
 
-                <div class="adults-only-section">
-                    <p class="adults-only-text">
-                        لتكتمل فرحتنا بأجواء أنيقة وهادئة، يرجى أن تقتصر الحفلة على الكبار فقط. نشكر لكم تفهمكم ومشاركتكم لنا هذه اللحظات الخاصة
-                    </p>
+                <!-- استبدال النص بصورة التوجيهات الجديدة وإبقاء جملة مع كل الحب مكانها -->
+                <div class="rules-image-section">
+                    <img src="assets/note-icon.png" alt="تعليمات الحفل" class="rules-img-banner">
                     <div class="with-love-text">مع كل الحب</div>
                 </div>
 
